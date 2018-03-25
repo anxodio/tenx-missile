@@ -3,7 +3,7 @@ import usb.core
 import usb.util
 
 
-class MissileLauncher():
+class MissileLauncher(object):
     _VENDOR_ID = 0x1130
     _PRODUCT_ID = 0x0202
 
@@ -34,7 +34,7 @@ class MissileLauncher():
             idVendor=self._VENDOR_ID,
             idProduct=self._PRODUCT_ID)
         if self._device is None:
-            raise ValueError("USB Missile Launcher not found. Is connected?")
+            raise ValueError("Missile Launcher not found. Is it connected?")
 
         def _get_interface(num):
             if self._device.is_kernel_driver_active(num):
@@ -93,7 +93,3 @@ class MissileLauncher():
             0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 0, 4, 0])
         self._device.ctrl_transfer(
             0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 64, 2, 0])
-
-
-if __name__ == '__main__':
-    launcher = MissileLauncher()
